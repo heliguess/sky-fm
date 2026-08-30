@@ -15,26 +15,16 @@
 	"icon": "assets/skyfm/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
+		"client": [
 			{
-				"value": "meow.heli.SkyFm",
+				"value": "meow.heli.skyfm.SkyFm",
 				"adapter": "kotlin"
 			}
 		],
-		"client": [
-			{
-				"value": "meow.heli.client.SkyFmClient",
-				"adapter": "kotlin"
-			}
+		"modmenu": [
+			"meow.heli.skyfm.config.ModMenuIntegration"
 		]
 	},
-	"mixins": [
-		"skyfm.mixins.json",
-		{
-			"config": "skyfm.client.mixins.json",
-			"environment": "client"
-		}
-	],
 	"depends": {
 		"fabricloader": ">=0.19.3",
 		"minecraft": "~26.2",

@@ -4,7 +4,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import meow.heli.skyfm.config.Config
+import meow.heli.skyfm.config.SkyFmConfig
 import java.net.URI
 import java.net.URLEncoder
 import java.net.http.HttpClient
@@ -30,7 +30,7 @@ object LastFmAPI {
         .connectTimeout(Duration.ofSeconds(8))
         .build()
 
-    suspend fun fetchLatestTrack(config: Config): Track = withContext(Dispatchers.IO) {
+    suspend fun fetchLatestTrack(config: SkyFmConfig): Track = withContext(Dispatchers.IO) {
         if (!config.isConfigured) {
             throw LastFmException("No Last.fm username linked - run /fm link <username> first")
         }
