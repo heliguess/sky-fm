@@ -1,7 +1,7 @@
 {
   "text.autoconfig.skyfm.title": "sky.fm Config",
-  "text.autoconfig.skyfm.category.general": "General",
-  "text.autoconfig.skyfm.option.username": "Username (last.fm)",
-  "text.autoconfig.skyfm.option.format": "Display Format",
-  "text.autoconfig.skyfm.option.format.@Tooltip": "Use {artist}, {track} and {album}!"
+  "text.autoconfig.skyfm.category.general": "§fGeneral",
+  "text.autoconfig.skyfm.option.username": "§fUsername (last.fm)",
+  "text.autoconfig.skyfm.option.format": "§fDisplay Format",
+  "text.autoconfig.skyfm.option.format.@Tooltip": "§fUse §e{artist}§r, §e{track}§r and §e{album}§r!"
 }

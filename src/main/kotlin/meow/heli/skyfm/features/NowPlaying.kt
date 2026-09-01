@@ -12,7 +12,7 @@ object NowPlaying {
 
     fun run(channelPrefix: String = "") {
         if (!SkyFm.config.isConfigured) {
-            localMessage("§cNot set up yet. Run §f/fm link <your last.fm username>")
+            localMessage("§cNot set up yet. Run §f/fm link <your last.fm username>§c or set in §f/fm config.")
             return
         }
 
