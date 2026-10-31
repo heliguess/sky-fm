@@ -5,8 +5,8 @@ import meow.heli.skyfm.SkyFm
 import meow.heli.skyfm.api.LastFmAPI
 import meow.heli.skyfm.api.Track
 import meow.heli.skyfm.util.localMessage
+import meow.heli.skyfm.util.deliver
 import meow.heli.skyfm.util.withClient
-import net.minecraft.client.Minecraft
 
 object NowPlaying {
 
@@ -34,15 +34,5 @@ object NowPlaying {
             .replace("{artist}", track.artist)
             .replace("{track}", track.name)
             .replace("{album}", track.album)
-    }
-
-    private fun deliver(channel: String, message: String) {
-        val player = Minecraft.getInstance().player ?: return
-
-        if (channel.isNotEmpty()) {
-            player.connection.sendCommand("$channel $message")
-        } else {
-            player.connection.sendChat(message)
-        }
     }
 }
