@@ -9,6 +9,9 @@ on: [pull_request, push]
 jobs:
   build:
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        minecraft: ['26.2', '26.3']
     steps:
       - name: checkout repository
         uses: actions/checkout@v6
@@ -22,9 +25,9 @@ jobs:
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: build
-        run: ./gradlew build
-      - name: capture build artifacts
+        run: ./gradlew :${{ matrix.minecraft }}:build
+      - name: capture build artifact
         uses: actions/upload-artifact@v7
         with:
-          name: Artifacts
-          path: build/libs/
+          path: build/libs/*.jar
+          archive: false
