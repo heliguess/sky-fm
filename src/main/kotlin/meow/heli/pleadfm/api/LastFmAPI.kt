@@ -1,11 +1,11 @@
-package meow.heli.skyfm.api
+package meow.heli.pleadfm.api
 
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import meow.heli.skyfm.config.SkyFmConfig
+import meow.heli.pleadfm.config.PleadfmConfig
 import java.net.URI
 import java.net.URLEncoder
 import java.net.http.HttpClient
@@ -46,7 +46,7 @@ object LastFmAPI {
         .connectTimeout(Duration.ofSeconds(8))
         .build()
 
-    suspend fun fetchLatestTrack(config: SkyFmConfig): Track = withContext(Dispatchers.IO) {
+    suspend fun fetchLatestTrack(config: PleadfmConfig): Track = withContext(Dispatchers.IO) {
         requireConfigured(config)
 
         val url = "https://ws.audioscrobbler.com/2.0/" +
@@ -78,7 +78,7 @@ object LastFmAPI {
     }
 
     suspend fun fetchTopArtists(
-        config: SkyFmConfig,
+        config: PleadfmConfig,
         period: StatsPeriod,
         limit: Int = 10
     ): List<TopEntry> = fetchTopEntries(
@@ -97,7 +97,7 @@ object LastFmAPI {
     }
 
     suspend fun fetchTopTracks(
-        config: SkyFmConfig,
+        config: PleadfmConfig,
         period: StatsPeriod,
         limit: Int = 10
     ): List<TopEntry> = fetchTopEntries(
@@ -116,7 +116,7 @@ object LastFmAPI {
     }
 
     suspend fun fetchTopAlbums(
-        config: SkyFmConfig,
+        config: PleadfmConfig,
         period: StatsPeriod,
         limit: Int = 10
     ): List<TopEntry> = fetchTopEntries(
@@ -135,7 +135,7 @@ object LastFmAPI {
     }
 
     private suspend fun fetchTopEntries(
-        config: SkyFmConfig,
+        config: PleadfmConfig,
         method: String,
         period: StatsPeriod,
         limit: Int,
@@ -181,7 +181,7 @@ object LastFmAPI {
         }
     }
 
-    private fun requireConfigured(config: SkyFmConfig) {
+    private fun requireConfigured(config: PleadfmConfig) {
         if (!config.isConfigured) {
             throw LastFmException("§cNot set up yet. Run §f/fm link <your last.fm username>§c or set in §f/fm config")
         }

@@ -1,13 +1,13 @@
-package meow.heli.skyfm.features
+package meow.heli.pleadfm.features
 
 import kotlinx.coroutines.launch
-import meow.heli.skyfm.SkyFm
-import meow.heli.skyfm.api.LastFmAPI
-import meow.heli.skyfm.api.StatsPeriod
-import meow.heli.skyfm.api.TopEntry
-import meow.heli.skyfm.util.localMessage
-import meow.heli.skyfm.util.deliver
-import meow.heli.skyfm.util.withClient
+import meow.heli.pleadfm.PleadFm
+import meow.heli.pleadfm.api.LastFmAPI
+import meow.heli.pleadfm.api.StatsPeriod
+import meow.heli.pleadfm.api.TopEntry
+import meow.heli.pleadfm.util.localMessage
+import meow.heli.pleadfm.util.deliver
+import meow.heli.pleadfm.util.withClient
 import net.minecraft.network.chat.Component
 
 enum class TopStatType(val label: String) {
@@ -28,45 +28,45 @@ object TopStats {
     private val CHAT_ENTRY = Regex("""^\d+\. (.+) \((\d+)\)$""")
 
     fun run(type: TopStatType, period: StatsPeriod = StatsPeriod.WEEK, limit: Int = 10) {
-        if (!SkyFm.config.isConfigured) {
+        if (!PleadFm.config.isConfigured) {
             localMessage("§cNot set up yet. Run §f/fm link <your last.fm username>§c or set in §f/fm config.")
             return
         }
 
-        SkyFm.scope.launch {
+        PleadFm.scope.launch {
             try {
                 val entries = when (type) {
-                    TopStatType.ARTISTS -> LastFmAPI.fetchTopArtists(SkyFm.config, period, limit)
-                    TopStatType.TRACKS -> LastFmAPI.fetchTopTracks(SkyFm.config, period, limit)
-                    TopStatType.ALBUMS -> LastFmAPI.fetchTopAlbums(SkyFm.config, period, limit)
+                    TopStatType.ARTISTS -> LastFmAPI.fetchTopArtists(PleadFm.config, period, limit)
+                    TopStatType.TRACKS -> LastFmAPI.fetchTopTracks(PleadFm.config, period, limit)
+                    TopStatType.ALBUMS -> LastFmAPI.fetchTopAlbums(PleadFm.config, period, limit)
                 }
                 withClient { display(type, period, entries) }
             } catch (e: Exception) {
-                SkyFm.LOGGER.warn("Failed to fetch $type", e)
-                withClient { localMessage("§c[sky.fm] ${e.message}") }
+                PleadFm.LOGGER.warn("Failed to fetch $type", e)
+                withClient { localMessage("§c[plead.fm] ${e.message}") }
             }
         }
     }
 
     fun runInChat(type: TopStatType, period: StatsPeriod, channel: String) {
-        if (!SkyFm.config.isConfigured) {
+        if (!PleadFm.config.isConfigured) {
             localMessage("§cNot set up yet. Run §f/fm link <your last.fm username>§c or set in §f/fm config.")
             return
         }
 
-        SkyFm.scope.launch {
+        PleadFm.scope.launch {
             try {
                 val entries = when (type) {
-                    TopStatType.ARTISTS -> LastFmAPI.fetchTopArtists(SkyFm.config, period)
-                    TopStatType.TRACKS -> LastFmAPI.fetchTopTracks(SkyFm.config, period)
-                    TopStatType.ALBUMS -> LastFmAPI.fetchTopAlbums(SkyFm.config, period)
+                    TopStatType.ARTISTS -> LastFmAPI.fetchTopArtists(PleadFm.config, period)
+                    TopStatType.TRACKS -> LastFmAPI.fetchTopTracks(PleadFm.config, period)
+                    TopStatType.ALBUMS -> LastFmAPI.fetchTopAlbums(PleadFm.config, period)
                 }
                 val maxLength = CHAT_LIMIT - if (channel.isEmpty()) 0 else channel.length + 1
                 val message = formatForChat(type, period, entries, maxLength)
                 withClient { deliver(channel, message) }
             } catch (e: Exception) {
-                SkyFm.LOGGER.warn("Failed to fetch $type", e)
-                withClient { localMessage("§c[sky.fm] ${e.message}") }
+                PleadFm.LOGGER.warn("Failed to fetch $type", e)
+                withClient { localMessage("§c[plead.fm] ${e.message}") }
             }
         }
     }
@@ -136,7 +136,7 @@ object TopStats {
 
         return listOf(
             BAR,
-            "  §d§lsky§5.§d§lfm  §r§8» §7${type.label}",
+            "  §d§lplead§5.§d§lfm  §r§8» §7${type.label}",
             if (sender != null) "  §8${period.label} · §7$sender" else "  §8${period.label}",
             "",
         ) + rows + BAR

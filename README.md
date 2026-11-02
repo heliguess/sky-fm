@@ -1,4 +1,4 @@
-# sky.fm
+# plead.fm 🥺
 
 ## Setup
 

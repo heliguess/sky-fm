@@ -1,4 +1,4 @@
-package meow.heli.skyfm.util
+package meow.heli.pleadfm.util
 
 import net.minecraft.client.Minecraft
 import net.minecraft.network.chat.Component

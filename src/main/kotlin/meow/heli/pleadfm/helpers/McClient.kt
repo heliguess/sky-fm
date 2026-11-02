@@ -1,4 +1,4 @@
-package meow.heli.skyfm.helpers
+package meow.heli.pleadfm.helpers
 
 import com.mojang.blaze3d.platform.Window
 import net.minecraft.client.Minecraft

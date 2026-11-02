@@ -1,4 +1,4 @@
-package meow.heli.skyfm.config
+package meow.heli.pleadfm.config
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
@@ -7,6 +7,6 @@ import net.minecraft.client.gui.screens.Screen
 
 class ModMenuIntegration : ModMenuApi {
     override fun getModConfigScreenFactory(): ConfigScreenFactory<*> {
-        return ConfigScreenFactory<Screen> { parent -> AutoConfigClient.getConfigScreen(SkyFmConfig::class.java, parent).get() }
+        return ConfigScreenFactory<Screen> { parent -> AutoConfigClient.getConfigScreen(PleadfmConfig::class.java, parent).get() }
     }
 }

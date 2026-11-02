@@ -1,12 +1,12 @@
-package meow.heli.skyfm.config
+package meow.heli.pleadfm.config
 
 import me.shedaniel.autoconfig.AutoConfig
 import me.shedaniel.autoconfig.ConfigData
 import me.shedaniel.autoconfig.annotation.Config
 import me.shedaniel.autoconfig.annotation.ConfigEntry
 
-@Config(name = "skyfm")
-class SkyFmConfig : ConfigData {
+@Config(name = "pleadfm")
+class PleadfmConfig : ConfigData {
 
     var username: String = ""
 
@@ -20,10 +20,10 @@ class SkyFmConfig : ConfigData {
         get() = username.isNotBlank()
 
     fun save() {
-        AutoConfig.getConfigHolder(SkyFmConfig::class.java).save()
+        AutoConfig.getConfigHolder(PleadfmConfig::class.java).save()
     }
 
     companion object {
-        fun get(): SkyFmConfig = AutoConfig.getConfigHolder(SkyFmConfig::class.java).config
+        fun get(): PleadfmConfig = AutoConfig.getConfigHolder(PleadfmConfig::class.java).config
     }
 }

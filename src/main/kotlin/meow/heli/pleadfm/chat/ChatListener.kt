@@ -1,9 +1,9 @@
-package meow.heli.skyfm.chat
+package meow.heli.pleadfm.chat
 
-import meow.heli.skyfm.api.StatsPeriod
-import meow.heli.skyfm.features.NowPlaying
-import meow.heli.skyfm.features.TopStatType
-import meow.heli.skyfm.features.TopStats
+import meow.heli.pleadfm.api.StatsPeriod
+import meow.heli.pleadfm.features.NowPlaying
+import meow.heli.pleadfm.features.TopStatType
+import meow.heli.pleadfm.features.TopStats
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.minecraft.client.Minecraft
 

@@ -17,4 +17,4 @@ stonecutter {
 	}
 }
 
-rootProject.name = "plead-fm"
+rootProject.name = "pleadfm"

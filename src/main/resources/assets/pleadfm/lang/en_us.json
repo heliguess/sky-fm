@@ -1,0 +1,9 @@
+{
+  "text.autoconfig.pleadfm.title": "plead.fm Config",
+  "text.autoconfig.pleadfm.category.general": "§fGeneral",
+  "text.autoconfig.pleadfm.option.username": "§fUsername (last.fm)",
+  "text.autoconfig.pleadfm.option.format": "§fNow Playing Format",
+  "text.autoconfig.pleadfm.option.format.@Tooltip": "§fUse §e{artist}§r, §e{track}§r and §e{album}§r!",
+  "text.autoconfig.pleadfm.option.lastPlayedFormat": "§fLast Played Format",
+  "text.autoconfig.pleadfm.option.lastPlayedFormat.@Tooltip": "§fShown when nothing is playing right now.\n§fUse §e{artist}§r, §e{track}§r and §e{album}§r!"
+}

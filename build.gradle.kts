@@ -19,7 +19,7 @@ repositories {
 
 loom {
 	mods {
-		register("plead-fm") {
+		register("pleadfm") {
 			sourceSet(sourceSets["main"])
 		}
 	}

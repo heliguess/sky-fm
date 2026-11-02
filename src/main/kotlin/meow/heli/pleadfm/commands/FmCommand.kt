@@ -1,16 +1,16 @@
-package meow.heli.skyfm.commands
+package meow.heli.pleadfm.commands
 
 import com.mojang.brigadier.Command
 import com.mojang.brigadier.arguments.StringArgumentType
 import com.mojang.brigadier.builder.LiteralArgumentBuilder
 import me.shedaniel.autoconfig.AutoConfigClient
-import meow.heli.skyfm.account.AccountLinker
-import meow.heli.skyfm.api.StatsPeriod
-import meow.heli.skyfm.config.SkyFmConfig
-import meow.heli.skyfm.features.NowPlaying
-import meow.heli.skyfm.features.TopStatType
-import meow.heli.skyfm.features.TopStats
-import meow.heli.skyfm.helpers.McClient
+import meow.heli.pleadfm.account.AccountLinker
+import meow.heli.pleadfm.api.StatsPeriod
+import meow.heli.pleadfm.config.PleadfmConfig
+import meow.heli.pleadfm.features.NowPlaying
+import meow.heli.pleadfm.features.TopStatType
+import meow.heli.pleadfm.features.TopStats
+import meow.heli.pleadfm.helpers.McClient
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback
 import net.fabricmc.fabric.api.client.command.v2.ClientCommands
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource
@@ -84,7 +84,7 @@ object FmCommand {
     private fun openConfigScreen() {
         val client = Minecraft.getInstance()
         client.execute {
-            val screen = AutoConfigClient.getConfigScreen(SkyFmConfig::class.java, McClient.screen).get()
+            val screen = AutoConfigClient.getConfigScreen(PleadfmConfig::class.java, McClient.screen).get()
             client.setScreenAndShow(screen)
         }
     }
