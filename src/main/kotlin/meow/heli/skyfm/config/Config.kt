@@ -13,6 +13,9 @@ class SkyFmConfig : ConfigData {
     @ConfigEntry.Gui.Tooltip
     var format: String = "\u266B Now playing: {artist} - {track}"
 
+    @ConfigEntry.Gui.Tooltip
+    var lastPlayedFormat: String = "\u266B Last played: {artist} - {track}"
+
     val isConfigured: Boolean
         get() = username.isNotBlank()
 

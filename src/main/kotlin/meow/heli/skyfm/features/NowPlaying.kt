@@ -19,7 +19,10 @@ object NowPlaying {
         SkyFm.scope.launch {
             try {
                 val track = LastFmAPI.fetchLatestTrack(SkyFm.config)
-                val formatted = format(SkyFm.config.format, track)
+                val template =
+                    if (track.nowPlaying) SkyFm.config.format
+                    else SkyFm.config.lastPlayedFormat
+                val formatted = format(template, track)
                 withClient { deliver(channelPrefix, formatted) }
             } catch (e: Exception) {
                 SkyFm.LOGGER.warn("Failed to fetch now playing track", e)
@@ -28,11 +31,9 @@ object NowPlaying {
         }
     }
 
-    private fun format(template: String, track: Track): String {
-        val prefix = if (track.nowPlaying) "" else "(last played) "
-        return prefix + template
+    private fun format(template: String, track: Track): String =
+        template
             .replace("{artist}", track.artist)
             .replace("{track}", track.name)
             .replace("{album}", track.album)
-    }
 }
