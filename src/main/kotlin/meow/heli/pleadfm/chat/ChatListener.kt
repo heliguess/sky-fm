@@ -81,7 +81,8 @@ object ChatListener {
         text.startsWith("Party > ", ignoreCase = true) -> "pc"
         text.startsWith("Guild > ", ignoreCase = true) -> "gc"
         text.startsWith("Officer > ", ignoreCase = true) -> "oc"
-        text.startsWith("From ", ignoreCase = true) -> "r"
+        text.startsWith("From ", ignoreCase = true) || text.startsWith("To ", ignoreCase = true) ->
+            "msg " + text.substringBefore(":").substringAfterLast(" ")
         else -> ""
     }
 }
