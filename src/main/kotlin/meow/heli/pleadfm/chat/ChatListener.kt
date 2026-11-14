@@ -6,6 +6,8 @@ import meow.heli.pleadfm.features.TopStatType
 import meow.heli.pleadfm.features.TopStats
 import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents
 import net.minecraft.client.Minecraft
+import java.util.concurrent.CompletableFuture
+import java.util.concurrent.TimeUnit
 
 object ChatListener {
 
@@ -65,7 +67,8 @@ object ChatListener {
                 text.endsWith("> .fm", ignoreCase = true)
 
         if (isTrigger) {
-            NowPlaying.run(channelOf(text))
+            val channel = channelOf(text)
+            reply(channel) { NowPlaying.run(channel) }
             return
         }
 
@@ -73,7 +76,15 @@ object ChatListener {
         val type = match.groupValues[1].lowercase().let { if (it.isEmpty()) TopStatType.ARTISTS else TYPES[it] }
         val period = match.groupValues[2].lowercase().let { if (it.isEmpty()) StatsPeriod.WEEK else PERIODS[it] }
         if (type != null && period != null) {
-            TopStats.runInChat(type, period, channelOf(text))
+            val channel = channelOf(text)
+            reply(channel) { TopStats.runInChat(type, period, channel) }
+        }
+    }
+
+    private fun reply(channel: String, action: () -> Unit) {
+        if (!channel.startsWith("msg ")) return action()
+        CompletableFuture.delayedExecutor(500, TimeUnit.MILLISECONDS).execute {
+            Minecraft.getInstance().execute { action() }
         }
     }
 
